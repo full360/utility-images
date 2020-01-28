@@ -1,5 +1,8 @@
 FROM alpine:3.6
 
+LABEL build.publish.majorversion="3.6"
+LABEL build.publish.imagebase="alpine"
+
 ENV ENVELOPE_VERSION 0.3.1
 ENV LANG en_US.UTF-8
 

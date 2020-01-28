@@ -2,6 +2,8 @@ FROM alpine:3.10
 
 LABEL build.publish.minorversion="1.15"
 LABEL build.publish.patchversion="1.15.1"
+LABEL build.publish.imagebase="alpine"
+
 
 RUN apk add curl git jq \
   && apk -Uuv add groff less python py-pip make bash \

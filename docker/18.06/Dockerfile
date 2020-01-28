@@ -1,4 +1,7 @@
-FROM docker:18.06.3-ce 
+FROM docker:18.06.3-ce
+
+LABEL build.publish.majorversion="18.06.3-ce"
+LABEL build.publish.imagebase="docker"
 
 ENV AWS_DEFAULT_REGION ap-southeast-2
 ENV AWS_REGION ap-southeast-2

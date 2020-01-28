@@ -2,6 +2,7 @@ FROM alpine:3.10
 
 LABEL build.publish.minorversion="0.5"
 LABEL build.publish.patchversion="0.5.6"
+LABEL build.publish.imagebase="alpine"
 
 ENV NOMAD_VERSION 0.5.6
 ENV NOMAD_SHA256 3f5210f0bcddf04e2cc04b14a866df1614b71028863fe17bcdc8585488f8cb0c
