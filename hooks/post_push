@@ -1,0 +1,3 @@
+#!/bin/bash
+make tag-${DOCKER_REPO##*/} 
+make push-${DOCKER_REPO##*/}

@@ -7,10 +7,9 @@ build:docker:
   script:
     - apk add --no-cache make git wget bash groff less python py-pip
     - pip install awscli
-    - for reg in $BUILD_REGIONS; do AWS_DEFAULT_REGION=$reg make; done
+    - make build
   only:
     - trigger
-    - fork_from_ql
     - master
   tags:
     - full360

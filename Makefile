@@ -1,5 +1,5 @@
-REGISTRY ?= github.com
 REGISTRY_NAMESPACE ?= full360
+REGISTRY ?= index.docker.io
 DOCKER_CI_REPO ?= $(REGISTRY)/$(REGISTRY_NAMESPACE)
 USECACHE = true
 DRYRUN = true
