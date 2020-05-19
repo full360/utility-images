@@ -55,7 +55,7 @@ load_variables (){
     export HEALTH_CHECK_PATH=${HEALTH_CHECK_PATH:-/$SERVICE_NAME/health}
     export VPC_ID=$(get_param_from_ssm "/$ENV/$CLIENT/vpc_id")
     export VPC_NAME=$(aws ec2 describe-vpcs \
-        --vpc-ids ${VPC_ID}
+        --vpc-ids ${VPC_ID} \
         | jq -cr '.Vpcs[].Tags[] | select(.Key=="Name") | .Value'
     )
     export SUBNET_TYPE=${SUBNET_TYPE:-private}
