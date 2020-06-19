@@ -3,7 +3,7 @@ FROM alpine:3.4
 LABEL build.publish.majorversion="3.4"
 LABEL build.publish.imagebase="alpine"
 
-ENV ENVELOPE_VERSION 0.3.1
+ENV ENVELOPE_VERSION 0.3.3
 ENV LANG en_US.UTF-8
 
 # Install required packages
