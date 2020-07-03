@@ -25,7 +25,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
-          path: docker/18.06
+          path: docker/19.03
           always_pull: true
           repository: full360/docker
           tags: "latest,19.03"
