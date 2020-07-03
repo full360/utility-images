@@ -1,6 +1,6 @@
-FROM alpine:3.4
+FROM alpine:3.12
 
-LABEL build.publish.majorversion="3.4"
+LABEL build.publish.majorversion="3.12"
 LABEL build.publish.imagebase="alpine"
 
 ENV ENVELOPE_VERSION 0.3.3
