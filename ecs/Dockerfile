@@ -16,7 +16,7 @@ RUN apk add --no-cache \
   jq \
   bash \
   aws-cli \
-  && curl https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-${ECS_CLI_VERSION} \
+  && curl "https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-${ECS_CLI_VERSION}" \
     -o /usr/local/bin/ecs-cli \
   && chmod 755 /usr/local/bin/ecs-cli
 
