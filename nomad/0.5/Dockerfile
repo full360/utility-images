@@ -1,4 +1,4 @@
-FROM alpine:3.10
+FROM alpine:3.12
 
 LABEL build.publish.minorversion="0.5"
 LABEL build.publish.patchversion="0.5.6"
