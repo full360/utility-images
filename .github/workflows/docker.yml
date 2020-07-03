@@ -1,0 +1,31 @@
+name: Docker Image Build
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - LICENSE
+      - README.md
+  schedule:
+    - cron: 0 0 * * 0
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build Docker 19.03
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+          path: docker/18.06
+          always_pull: true
+          repository: full360/docker
+          tags: "latest,19.03"

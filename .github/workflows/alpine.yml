@@ -1,0 +1,69 @@
+name: Alpine Images Build
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - LICENSE
+      - README.md
+  schedule:
+    - cron: 0 0 * * 0
+
+jobs:
+  alpine:
+    runs-on: ubuntu-latest
+
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build Alpine 3.12
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+          path: alpine/3.12
+          always_pull: true
+          repository: full360/alpine
+          tags: latest,3.12-alpine
+
+  ecs:
+    runs-on: ubuntu-latest
+
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build ECS
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+          path: ecs
+          always_pull: true
+          repository: full360/ecs
+          tags: latest,1.19-alpine,1.19.1-alpine
+
+  nomad:
+    runs-on: ubuntu-latest
+
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build Nomad 0.5
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+          path: nomad/0.5
+          always_pull: true
+          repository: full360/nomad
+          tags: latest,0.5-alpine,0.5.6-alpine
