@@ -1,4 +1,4 @@
-name: GitHub CI
+name: Alpine Images Build
 
 on:
   push:
@@ -12,59 +12,33 @@ on:
 
 jobs:
   alpine:
-    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     runs-on: ubuntu-latest
+
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Build Alpine 3.4
+
+      - name: Build Alpine 3.12
         uses: docker/build-push-action@v1
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
-          path: alpine/3.4
+          path: alpine/3.12
           always_pull: true
           repository: full360/alpine
-          tags: 3.4-alpine
-      - name: Build Alpine 3.6
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
-          path: alpine/3.6
-          always_pull: true
-          repository: full360/alpine
-          tags: latest,3.6-alpine
-  docker:
-    if: "!contains(github.event.commits[0].message, '[skip ci]')"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Build Docker 17.06
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
-          path: docker/17.06
-          always_pull: true
-          repository: full360/docker
-          tags: latest,17.06.2-ce-docker
-      - name: Build Docker 18.06
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
-          path: docker/18.06
-          always_pull: true
-          repository: full360/docker
-          tags: 18.06.3-ce-docker
+          tags: latest,3.12-alpine
+
   ecs:
-    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     runs-on: ubuntu-latest
+
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Build ECS
         uses: docker/build-push-action@v1
         with:
@@ -74,12 +48,16 @@ jobs:
           always_pull: true
           repository: full360/ecs
           tags: latest,1.15-alpine,1.15.1-alpine
+
   nomad:
-    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     runs-on: ubuntu-latest
+
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Build Nomad 0.5
         uses: docker/build-push-action@v1
         with:
