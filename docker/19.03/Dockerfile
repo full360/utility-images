@@ -10,7 +10,4 @@ RUN apk add --no-cache \
     wget \
     curl \
     bash \
-    groff \
-    less \
-    python3 \
     aws-cli

@@ -15,9 +15,6 @@ RUN apk add --no-cache \
   git \
   jq \
   bash \
-  groff \
-  less \
-  python3 \
   aws-cli \
   && curl "https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-${ECS_CLI_VERSION}" \
     -o /usr/local/bin/ecs-cli \
