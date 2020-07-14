@@ -29,3 +29,13 @@ jobs:
           always_pull: true
           repository: full360/docker
           tags: "latest,19.03"
+
+      - name: Build awscli v1
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+          path: docker/19.03
+          always_pull: true
+          repository: full360/awscli
+          tags: "latest,v1"
