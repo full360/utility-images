@@ -61,7 +61,7 @@ load_variables (){
     export SUBNET_TYPE=${SUBNET_TYPE:-private}
     export SUBNET_NAME=${SUBNET_NAME:-${VPC_NAME}-${SUBNET_TYPE}*}
     export SUBNET_IDS=$(aws ec2 describe-subnets \
-        --filters "Name=vpc-id,Values=${VPC_ID},Values=${SUBNET_NAME}" \
+        --filters "Name=vpc-id,Values=${VPC_ID}" "Name=tag:Name,Values=${SUBNET_NAME}" \
         | jq -cr '[.Subnets[].SubnetId] | join(",")'
     )
     export SECURITY_GROUP=$(get_param_from_ssm "/$ENV/$CLIENT/orchestrator/$CLUSTER_NAME/security_group")
