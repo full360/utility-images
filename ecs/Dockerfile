@@ -4,7 +4,7 @@ LABEL build.publish.minorversion="1.19"
 LABEL build.publish.patchversion="1.19.1"
 LABEL build.publish.imagebase="alpine"
 
-ENV ECS_CLI_VERSION 1.19.1
+ENV ECS_CLI_VERSION v1.20.0
 
 RUN apk add --no-cache \
   make \
@@ -16,7 +16,7 @@ RUN apk add --no-cache \
   jq \
   bash \
   aws-cli \
-  && curl "https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-${ECS_CLI_VERSION}" \
+  && curl -fsSL https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-${ECS_CLI_VERSION} \
     -o /usr/local/bin/ecs-cli \
   && chmod 755 /usr/local/bin/ecs-cli
 
