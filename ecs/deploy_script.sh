@@ -42,7 +42,7 @@ do
     if [ $TYPE == "SERVICE" ]; then
       if [[ -z "${SERVICE_PORT}" ]]; then echo "missing SERVICE_PORT"; exit_abnormal; fi
       export SCHEDULE=${SCHEDULE:-"cron(0 0 * * ? *)"}
-      export SERVICE_COUNT=${SERVICE_COUNT:-2}
+      export SERVICE_COUNT=${SERVICE_COUNT:-1}
       VISIBILITY=${VISIBILITY:-"PUBLIC"}
     else
       if [[ -z "${SCHEDULE}" ]]; then echo "missing SCHEDULE"; exit_abnormal; fi
@@ -186,6 +186,7 @@ if [ $TYPE == "SERVICE" ]; then
     fi
 
     currentInstancesCount=$(($(ecs-cli compose --project-name $APP_NAME --ecs-params $ECS_PARAMS_PATH --file $DOCKER_COMPOSE_PATH service list --desired-status RUNNING | wc -l)-1))
+
     if [ $(echo $currentInstancesCount) -ne $SERVICE_COUNT ];then
       echo "current instances count $currentInstancesCount... scaling to $SERVICE_COUNT"
       ecs-cli compose \
