@@ -129,7 +129,7 @@ create_load_balancer(){
 
 load_variables
 ecs-cli configure --cluster $CLUSTER_NAME --region $REGION --config-name default
-if [ $STOP_SERVICE == "YES" ]; then
+if [ "$STOP_SERVICE" == "YES" ]; then
     echo "Starting process to delete service $SERVICE_NAME..."
     tgDetails=$(aws elbv2 describe-target-groups | jq -c '.TargetGroups[] | select(.TargetGroupName =="'$APP_NAME'")')
     if [ $(echo $tgDetails | jq -c -r '. | select(.TargetGroupName =="'$APP_NAME'")' | wc -l) -ge 1 ]; then
