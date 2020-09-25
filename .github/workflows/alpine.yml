@@ -20,15 +20,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Build Alpine 3.12
-        uses: docker/build-push-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
-          path: alpine/3.12
-          always_pull: true
-          repository: full360/alpine
-          tags: latest,3.12-alpine
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Alpine 3.12
+        uses: docker/build-push-action@v2
+        with:
+          context: alpine/3.12
+          pull: true
+          push: true
+          tags: |
+            full360/alpine:latest
+            full360/alpine:3.12-alpine
 
   ecs:
     runs-on: ubuntu-latest
@@ -39,15 +48,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Build ECS
-        uses: docker/build-push-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
-          path: ecs
-          always_pull: true
-          repository: full360/ecs
-          tags: latest,1.19-alpine,1.19.1-alpine
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build ECS
+        uses: docker/build-push-action@v2
+        with:
+          context: ecs
+          pull: true
+          push: true
+          tags: |
+            full360/ecs:latest
+            full360/ecs:1.19-alpine
+            full360/ecs:1.19.1-alpine
+
 
   nomad:
     runs-on: ubuntu-latest
@@ -58,12 +78,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Build Nomad 0.5
-        uses: docker/build-push-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
-          path: nomad/0.5
-          always_pull: true
-          repository: full360/nomad
-          tags: latest,0.5-alpine,0.5.6-alpine
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Nomad 0.5
+        uses: docker/build-push-action@v2
+        with:
+          context: nomad/0.5
+          pull: true
+          push: true
+          tags: |
+            full360/nomad:latest
+            full360/nomad:0.5-alpine
+            full360/nomad:0.5.6-alpine
