@@ -32,7 +32,7 @@ jobs:
       - name: Build Alpine 3.12
         uses: docker/build-push-action@v2
         with:
-          context: alpine/3.12
+          context: ./alpine/3.12
           pull: true
           push: true
           tags: |
@@ -60,7 +60,7 @@ jobs:
       - name: Build ECS
         uses: docker/build-push-action@v2
         with:
-          context: ecs
+          context: ./ecs
           pull: true
           push: true
           tags: |
@@ -90,7 +90,7 @@ jobs:
       - name: Build Nomad 0.5
         uses: docker/build-push-action@v2
         with:
-          context: nomad/0.5
+          context: ./nomad/0.5
           pull: true
           push: true
           tags: |
