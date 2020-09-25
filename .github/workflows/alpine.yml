@@ -33,6 +33,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./alpine/3.12
+          file: ./alpine/3.12/Dockerfile
           pull: true
           push: true
           tags: |
@@ -61,6 +62,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./ecs
+          file: ./ecs/Dockerfile
           pull: true
           push: true
           tags: |
@@ -91,6 +93,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./nomad/0.5
+          file: ./nomad/0.5/Dockerfile
           pull: true
           push: true
           tags: |

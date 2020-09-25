@@ -36,6 +36,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./docker/19.03
+          file: ./docker/19.03/Dockerfile
           platforms: linux/amd64,linux/arm64
           pull: true
           push: true
