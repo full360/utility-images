@@ -10,4 +10,5 @@ RUN apk add --no-cache \
     wget \
     curl \
     bash \
+    tar \
     aws-cli
